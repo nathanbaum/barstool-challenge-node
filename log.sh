@@ -1,0 +1,1 @@
+strace -p$(cat ./processes)

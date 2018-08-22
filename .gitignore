@@ -59,3 +59,12 @@ typings/
 
 # next.js build output
 .next
+
+# logging output for mongodb
+mongolog*
+
+# state files for server management
+.processes
+
+# config files
+src/config.json

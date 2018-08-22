@@ -1,0 +1,30 @@
+{
+  "name": "barstool-challenge-node",
+  "version": "1.0.0",
+  "description": "NodeJS API for barstool coding challenge",
+  "scripts": {
+    "test": "echo \"tests not implemented yet!\"",
+    "start": "./start.sh",
+    "stop": "./stop.sh",
+    "log": "./log.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nathanbaum/barstool-challenge-node.git"
+  },
+  "author": "Nathan Baum",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nathanbaum/barstool-challenge-node/issues"
+  },
+  "homepage": "https://github.com/nathanbaum/barstool-challenge-node#readme",
+  "devDependencies": {
+    "eslint": "^5.4.0",
+    "mocha": "^5.2.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "mongoose": "^5.2.9"
+  }
+}
