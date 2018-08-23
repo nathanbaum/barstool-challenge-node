@@ -4,45 +4,68 @@ const ObjectID = mongoose.Schema.Types.ObjectId;
 mongoose.plugin(schema => { schema.options.usePushEach = true; });
 
 //my schema goes here!
-const User = new mongoose.Schema({
-  sessionID: String,
-  liked: [{type: ObjectID, ref: 'Article'}],
-  disliked: [{type: ObjectID, ref: 'Article'}]
-});
-
-const Article = new mongoose.Schema({
-  title: String,
-  content: String,
-  imageURL: String,
-  conBlurbs: [{
-    imageURL: String,
-    content: String,
+const Game = new mongoose.Schema({
+  deleted: Boolean,
+  status: String,
+  awayTeamFinal: Number,
+  awayTeamDetails: [{
+    number: Number,
+    sequence: Number,
+    runs: Number,
+    hits: Number,
+    errors: Number,
+    type: String
   }],
-  proBlurbs: [{
-    imageURL: String,
-    content: String,
+  homeTeamFinal: Number,
+  homeTeamDetails: [{
+    number: Number,
+    sequence: Number,
+    runs: Number,
+    hits: Number,
+    errors: Number,
+    type: String
   }],
-  likes: Number,
-  dislikes: Number
-},
-{
-  timestamps: true
+  isPeriodOver: String,
+  currentPeriod: 7,
+  currentPeriodHalf: String,
+  oddsAvailable: false,
+  createdAt: Date,
+  modifiedAt: Date,
+  feedId: String,
+  awayTeam: {type: ObjectID, ref: 'Team'},
+  dateTime: Date,
+  homeTeam: {type: ObjectID, ref: 'Team'},
+  league: {type: ObjectID, ref: 'League'},
+  id: String,
 });
 
-const IndustryTag = new mongoose.Schema({
-  key: String,
-  value: [{type: ObjectID, ref: 'Article'}]
+const Team = new mongoose.Schema({
+  deleted: Boolean,
+  teamColor: String,
+  textColor: String,
+  createdAt: Date,
+  modifiedAt: Date,
+  feedId: String,
+  abbr: String,
+  league: {type: ObjectID, ref: 'League'},
+  market: String,
+  name: String,
+  id: String,
 });
 
-const IssueTag = new mongoose.Schema({
-  key: String,
-  value: [{type: ObjectID, ref: 'Article'}]
+const League = new mongoose.Schema({
+  deleted: Boolean,
+  createdAt: Date,
+  modifiedAt: Date,
+  feedId: String,
+  alias: String,
+  name: String,
+  id: String,
 });
 
-mongoose.model('User', User);
-mongoose.model('Article', Article);
-mongoose.model('IndustryTag', IndustryTag);
-mongoose.model('IssueTag', IssueTag);
+mongoose.model('Game', Game);
+mongoose.model('Team', Team);
+mongoose.model('League', League);
 
 let dbconf = null;
 // is the environment variable, NODE_ENV, set to PRODUCTION?
