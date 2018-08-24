@@ -2,6 +2,7 @@
 const mongoose = require('mongoose');
 const ObjectID = mongoose.Schema.Types.ObjectId;
 mongoose.plugin(schema => { schema.options.usePushEach = true; });
+mongoose.set('useFindAndModify', false);
 
 //my schema goes here!
 const Game = new mongoose.Schema({
@@ -13,8 +14,8 @@ const Game = new mongoose.Schema({
     sequence: Number,
     runs: Number,
     hits: Number,
-    errors: Number,
-    type: String
+    entryErrors: Number,
+    entryType: String
   }],
   homeTeamFinal: Number,
   homeTeamDetails: [{
@@ -22,13 +23,13 @@ const Game = new mongoose.Schema({
     sequence: Number,
     runs: Number,
     hits: Number,
-    errors: Number,
-    type: String
+    entryErrors: Number,
+    entryType: String
   }],
   isPeriodOver: String,
-  currentPeriod: 7,
+  currentPeriod: Number,
   currentPeriodHalf: String,
-  oddsAvailable: false,
+  oddsAvailable: Boolean,
   createdAt: Date,
   modifiedAt: Date,
   feedId: String,
@@ -36,7 +37,7 @@ const Game = new mongoose.Schema({
   dateTime: Date,
   homeTeam: {type: ObjectID, ref: 'Team'},
   league: {type: ObjectID, ref: 'League'},
-  id: String,
+  foreignId: String,
 });
 
 const Team = new mongoose.Schema({
@@ -50,7 +51,7 @@ const Team = new mongoose.Schema({
   league: {type: ObjectID, ref: 'League'},
   market: String,
   name: String,
-  id: String,
+  foreignId: String,
 });
 
 const League = new mongoose.Schema({
@@ -60,7 +61,7 @@ const League = new mongoose.Schema({
   feedId: String,
   alias: String,
   name: String,
-  id: String,
+  foreignId: String,
 });
 
 mongoose.model('Game', Game);
